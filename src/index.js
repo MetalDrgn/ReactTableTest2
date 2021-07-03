@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './App.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./App.css";
 // import App from './App';
 
 const setup = Array(12).fill(Array(3).fill(null));
@@ -14,7 +14,7 @@ function Tbl({ setup, incell, id, getinfo }) {
   return (
     <table id={id}>
       {setup.map((e) => (
-        <Roww setup={setup[0]} i={(i += 3)} incell={incell} />
+        <Roww setup={setup[0]} i={(i += 3)} incell={incell} getinfo={getinfo} />
       ))}
     </table>
   );
@@ -24,7 +24,7 @@ function Roww({ setup, i, incell, getinfo }) {
   return (
     <tr>
       {setup.map((e) => (
-        <Cell incell={incell} i={i++} />
+        <Cell incell={incell} i={i++} getinfo={getinfo} />
       ))}
     </tr>
   );
@@ -43,11 +43,17 @@ function Cell({ i, incell, getinfo }) {
 ReactDOM.render(
   <>
     <h1>Hello World</h1>
-    <Tbl id={"tbl" + String(0)} setup={setup} incell={"asd"} getinfo={null} />
+    <Tbl id={"tbl" + String(0)} setup={setup} incell={"asd"} />
     <Tbl
       id={"tbl" + String(1)}
       setup={setup}
-      incell={<input type="number" onChange={e => console.log(e.target)} />}
+      incell={
+        <input
+          type="number"
+          onChange={(e) => console.log(e.target)}
+          getinfo={null}
+        />
+      }
     />
   </>,
   document.getElementById("root")
