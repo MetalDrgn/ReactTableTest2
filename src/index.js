@@ -1,38 +1,39 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import "./App.css";
 // import App from './App';
 
-const setup = Array(12).fill(Array(3).fill(null));
-function Tbl({ setup, incell, id, getinfo }) {
+function Tbl({ incell, id, getinfo, ref }) {
+  const [arr, setArr] = useState(Array(12).fill(Array(3).fill(null)));
+
+  let i = 0;
   // React.useEffect(() => {
   //   console.log("change");
   // });
-  let i = 0;
-  // console.log(setup.length);
+  // console.log(arr.length);
   // document.querySelector("#a3").innerText
+  console.log(ref);
   return (
     <table id={id}>
-      {" "}
       <tbody>
-        {setup.map((e) => (
-          <Roww setup={setup[0]} i={(i += 3)} incell={incell} />
+        {arr.map((e) => (
+          <Roww arr={arr[0]} i={(i += 3)} incell={incell} />
         ))}
       </tbody>
     </table>
   );
 }
-function Roww({ setup, i, incell, getinfo }) {
-  // console.log(setup[0].length)
+function Roww({ arr, i, incell, getinfo, ref }) {
+  // console.log(arr[0].length)
   return (
     <tr>
-      {setup.map((e) => (
+      {arr.map((e) => (
         <Cell incell={incell} i={i++} />
       ))}
     </tr>
   );
 }
-function Cell({ i, incell, getinfo }) {
+function Cell({ i, incell, getinfo, ref }) {
   return (
     <td id={"a" + String(i++)}>
       {/* {document.querySelector("#tbl1 #a3 input").value ?
@@ -43,21 +44,20 @@ function Cell({ i, incell, getinfo }) {
     </td>
   );
 }
-ReactDOM.render(
-  <>
-    <h1>Hello World</h1>
-    <Tbl id={"tbl" + String(0)} setup={setup} incell={"asd"} getinfo={null} />
-    <Tbl
-      id={"tbl" + String(1)}
-      setup={setup}
-      incell={
-        <input type="number" onChange={(e) => document.querySelector("#tbl0 #a3").innerText = "sdf"} />
-        {/* <input type="number" onChange={(e) => console.log(e.target.value)} /> */}
-      }
-    />
-  </>,
-  document.getElementById("root")
-);
+function Temp() {
+  const cellRef = useRef();
+  return (
+    <>
+      <h1>Hello World</h1>
+      <Tbl id={"tbl" + String(0)} incell={"asd"} getinfo={null} />
+      <Tbl
+        id={"tbl" + String(1)}
+        incell={<input type="number" ref={cellRef} />}
+      />
+    </>
+  );
+}
+ReactDOM.render(<Temp />, document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
