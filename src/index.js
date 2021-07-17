@@ -4,7 +4,7 @@ import "./App.css";
 // import App from './App';
 
 // ------------------- Tbl: Creates the rows in the tables => Roww
-function Tbl({ incell, id, getinfo, row, func }) {
+function Tbl({ incell, id, getinfo, objj, func }) {
   let i = Array(12).fill(null);
   let cnt = 0;
 
@@ -12,7 +12,7 @@ function Tbl({ incell, id, getinfo, row, func }) {
     <>
       <table id={id}>
         {i.map((e, r) => {
-          return <Roww cnt={cnt++} incell={incell} func={func} />;
+          return <Roww cnt={cnt++} incell={incell} objj={objj} func={func} />;
         })}
       </table>
     </>
@@ -20,25 +20,33 @@ function Tbl({ incell, id, getinfo, row, func }) {
 }
 
 // -------------------  Roww: Creates the 3 columns in each row => Cell
-function Roww({ cnt, incell, func }) {
+function Roww({ cnt, incell, func, objj }) {
   // console.log(i);
   let c = 0;
   return (
     <tr>
-      <Cell incell={incell} cnt={cnt} c={c++} func={func} />
-      <Cell incell={incell} cnt={cnt} c={c++} func={func} />
-      <Cell incell={incell} cnt={cnt} c={c++} func={func} />
+      <Cell incell={incell} cnt={cnt} c={c++} objj={objj} func={func} />
+      <Cell incell={incell} cnt={cnt} c={c++} objj={objj} func={func} />
+      <Cell incell={incell} cnt={cnt} c={c++} objj={objj} func={func} />
     </tr>
   );
 }
 
 // ------------------- Cell: for each cell of first table it runs func and appends
 // -------------------------the rc of the cell to a useRef. Otherwise => Boxes
-function Cell({ incell, cnt, c, func }) {
+function Cell({ incell, cnt, c, func, objj }) {
   if (incell) {
     func(cnt, c, 0);
   }
-  return <td>{incell ? "r" + cnt + "c" + c : <Boxes row={cnt} col={c} />}</td>;
+  return (
+    <td>
+      {incell ? (
+        "r" + cnt + "c" + c + objj.current[objj.current.length - 1].val
+      ) : (
+        <Boxes row={cnt} col={c} />
+      )}
+    </td>
+  );
 }
 
 // ------------------- Boxes: creates input boxes for second table.
@@ -63,7 +71,13 @@ function Tables() {
   return (
     <>
       <h1>Hello World</h1>
-      <Tbl id={"tbl" + String(0)} incell={true} getinfo={null} func={chg} />
+      <Tbl
+        id={"tbl" + String(0)}
+        incell={true}
+        getinfo={null}
+        objj={objj}
+        func={chg}
+      />
       <Tbl id={"tbl" + String(1)} incell={null} />
     </>
   );
