@@ -5,24 +5,8 @@ import "./App.css";
 
 // ------------------- Tbl: Creates the rows in the tables => Roww
 function Tbl({ incell, id, getinfo, row, func }) {
-  // console.log(row);
-  // React.useEffect(() => {
-  //   console.log("change");
-  // });
   let i = Array(12).fill(null);
   let cnt = 0;
-  // console.log(setup.length);
-  // document.querySelector("#a3").innerText
-
-  // const [setupb, setSetupb] = React.useState(Array(12).fill(null));
-  // function arr2(arr) {
-  //   const newt = arr.map((e, r, all) => (r === 0 ? 2.5 : all[r - 1] + 2.5));
-  //   console.log(newt);
-  //   return newt;
-  // }
-  // setSetupb(arr2(setupb))
-
-  // console.log(1);
 
   return (
     <>
@@ -73,34 +57,9 @@ function Boxes({ row, col }) {
 // ------------------- Tables: Creates the 2 main tables => Tbl
 function Tables() {
   const objj = React.useRef([]);
-  // const [objj, setObj] = React.useState([]);
-  // const [setup, setSetup] = React.useState(arrsetup());
-  console.log(objj);
-  // function arrsetup() {
-  //   let arr = Array(10 * 3).fill(null);
-  //   // console.log(arr)
-  //   // let arr = Array(12).fill(null);
-  //   let x = 1;
-  //   for (let i in arr) {
-  //     arr[i] = x++;
-  //     // arr[i] = [];
-  //     // for (let j = 0; j < 3; j++) {
-  //     //   arr[i].push(x++);
-  //     // }
-  //   }
-  //   return arr;
-  // }
   function chg(r, c, v) {
-    // const newTodos = [...setup];
-    // const todo = newTodos.find((todo) => todo.id === id);
-    // todo.complete = !todo.complete;
-    // newTodos[r] = 1;
-    // colsole.log(objj);
-
-    // setObj((prev) => [...prev, { row: r, col: c, val: v }]);
     objj.current.push({ row: r, col: c, val: v });
   }
-  // console.log(arrsetup());
   return (
     <>
       <h1>Hello World</h1>
