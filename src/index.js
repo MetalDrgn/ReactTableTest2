@@ -24,11 +24,12 @@ function Tbl({ setup, incell, id, getinfo, row, func }) {
   // console.log(1);
 
   return (
+    <>
     <table id={id}>
       {i.map((e, r) => {
         return <Roww setup={setup} cnt={cnt++} incell={incell} func={func} />;
       })}
-    </table>
+    </table></>
   );
 }
 function Roww({ cnt, incell, setup, func }) {
@@ -43,7 +44,7 @@ function Roww({ cnt, incell, setup, func }) {
   );
 }
 function Cell({ incell, cnt, c, func }) {
-  // incell ? func(cnt, c, 0) : null;
+  if (incell) {func(cnt, c, 0)} 
   // incell ? func(1, 2, 3) : null;
   return <td>{incell ? "r" + cnt + "c" + c : <Boxes row={cnt} col={c} />}</td>;
 }
@@ -64,7 +65,7 @@ function Tables() {
   const [setup, setSetup] = React.useState(arrsetup());
   console.log(objj);
   function arrsetup() {
-    let arr = Array(12 * 3).fill(null);
+    let arr = Array(10 * 3).fill(null);
     // console.log(arr)
     // let arr = Array(12).fill(null);
     let x = 1;
