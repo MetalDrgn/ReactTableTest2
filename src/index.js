@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import "./App.css";
 // import App from './App';
 
+/* Left table should start at 2.5 and increment 2.5 per row unless
+there is a value in the same cell on the right table. In that case 
+it should still increment the current cell +2.5 then subtract the 
+value from the same cell in the right table*/
 // ------------------- Tbl: Creates the rows in the tables => Roww
 function Tbl({ incell, id, getinfo, objj, func }) {
   let i = Array(12).fill(null);
